@@ -6,6 +6,6 @@ LABEL version="1.0"
 
 COPY config/my.cnf /etc/mysql/conf.d/custom.cnf
 
-EXPOSE 3306
+EXPOSE 3306git
 
 CMD ["mysqld"]
