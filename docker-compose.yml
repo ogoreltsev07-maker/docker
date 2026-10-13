@@ -4,7 +4,7 @@ services:
     container_name: course_mysql
     restart: unless-stopped
     ports:
-      - "3306:3306"
+      - "3307:3306"
     env_file:
       - .env
     environment:
