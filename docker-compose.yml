@@ -16,20 +16,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./backups:/backups
-      - mysql_logs:/var/log/mysql
-      - ./scripts:/scripts:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmy_strong_password_123"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
-        tag: "{{.Name}}/{{.ID}}"
 
   mysqld-exporter:
     image: prom/mysqld-exporter:latest
@@ -37,6 +34,8 @@ services:
     restart: unless-stopped
     ports:
       - "9104:9104"
+    env_file:
+      - .env
     environment:
       - DATA_SOURCE_NAME=root:${MYSQL_ROOT_PASSWORD}@(mysql:3306)/
     depends_on:
@@ -49,6 +48,4 @@ services:
 
 volumes:
   mysql_data:
-    driver: local
-  mysql_logs:
     driver: local
