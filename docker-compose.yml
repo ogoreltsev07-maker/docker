@@ -16,21 +16,19 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - TZ=${TZ}
     volumes:
-      # Персистентное хранение данных БД
       - mysql_data:/var/lib/mysql
-      # Бэкапы
       - ./backups:/backups
-      # Логи
       - mysql_logs:/var/log/mysql
-      # Кастомные скрипты (опционально)
       - ./scripts:/scripts:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 volumes:
   mysql_data:
     driver: local
-    labels:
-      description: "MySQL data volume"
   mysql_logs:
     driver: local
-    labels:
-      description: "MySQL logs volume"
