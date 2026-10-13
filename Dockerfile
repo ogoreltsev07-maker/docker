@@ -1,7 +1,7 @@
 FROM mysql:8.4
 
 # Метаданные
-LABEL maintainer="твой@email.com"
+LABEL maintainer="ogoreltsev07@bk.ru"
 LABEL description="Custom MySQL container for course work"
 
 # Копируем конфиг
