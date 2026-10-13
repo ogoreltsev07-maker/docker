@@ -15,3 +15,22 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - TZ=${TZ}
+    volumes:
+      # Персистентное хранение данных БД
+      - mysql_data:/var/lib/mysql
+      # Бэкапы
+      - ./backups:/backups
+      # Логи
+      - mysql_logs:/var/log/mysql
+      # Кастомные скрипты (опционально)
+      - ./scripts:/scripts:ro
+
+volumes:
+  mysql_data:
+    driver: local
+    labels:
+      description: "MySQL data volume"
+  mysql_logs:
+    driver: local
+    labels:
+      description: "MySQL logs volume"
