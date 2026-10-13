@@ -19,7 +19,7 @@ services:
       - mysql_logs:/var/log/mysql
       - ./scripts:/scripts:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmy_strong_password_123"]
       interval: 10s
       timeout: 5s
       retries: 5
