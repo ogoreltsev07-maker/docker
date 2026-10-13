@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Документация
+README.md
+docs/
+
+# Данные
+data/
+backups/
+logs/
+
+# Переменные окружения
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
